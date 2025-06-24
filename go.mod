@@ -2,7 +2,10 @@ module CRUD_DOCKER_HOMEPAGE
 
 go 1.24.4
 
-require github.com/gin-gonic/gin v1.10.1
+require (
+	github.com/gin-gonic/gin v1.10.1
+	github.com/golang-jwt/jwt v3.2.2+incompatible
+)
 
 require filippo.io/edwards25519 v1.1.0 // indirect
 

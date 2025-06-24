@@ -19,6 +19,8 @@ func main() {
 		})
 	})
 
+	router.POST("/login_1", handle.Login)
+
 	router.POST("/receive_formdata", handle.Receiveinfo_useformdata)
 
 	router.POST("/receive_rawdata", handle.Receiveinfo_userawdata)

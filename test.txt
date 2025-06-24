@@ -1,0 +1,27 @@
+func (test Info) something(c *gin.Context) string {
+	// func            → คำสั่งประกาศฟังก์ชัน
+	// (test Info)     → Receiver ของ method – หมายความว่า something เป็น method ของ struct Info
+	//                   และจะมีตัวแปรชื่อ test แทน instance ของ Info ที่เรียกเมธอดนี้
+	// something       → ชื่อของเมธอดนี้
+	// (c *gin.Context)→ พารามิเตอร์ชื่อ c ชนิด pointer ไปยัง gin.Context (จาก Gin Web Framework)
+	//                   ใช้เพื่อดึงข้อมูล HTTP request/response
+	// string          → คือประเภทค่าที่ฟังก์ชันนี้จะ return กลับออกไป คือ string
+
+	return "" // เป็นการคืนค่ากลับเป็น string ว่าง ("")
+}
+
+
+
+input := "P10S22620240401060001202404021413506002940100600294"
+	info := handle.Cutstring(input)
+	for i, field := range info {
+		fmt.Printf("Field %d: %s\n", i+1, field)
+	}
+
+
+	
+	// input := "P10S22620240401060001202404021413506002940100600294"
+	// info := handle.Cutstring(input)
+	// for i, field := range info {
+	// 	fmt.Printf("Field %d: %s\n", i+1, field)
+	// }

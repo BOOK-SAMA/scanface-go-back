@@ -20,6 +20,7 @@ func main() {
 	})
 
 	router.POST("/login_1", handle.Login)
+	router.POST("/testtoken", handle.TestToken)
 
 	router.POST("/receive_formdata", handle.Receiveinfo_useformdata)
 

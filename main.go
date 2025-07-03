@@ -18,7 +18,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-
+	handle.Testrsa()
 	router.POST("/login_1", handle.Login)
 	router.POST("/testtoken", handle.TestToken)
 

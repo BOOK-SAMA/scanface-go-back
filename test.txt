@@ -25,3 +25,44 @@ input := "P10S22620240401060001202404021413506002940100600294"
 	// for i, field := range info {
 	// 	fmt.Printf("Field %d: %s\n", i+1, field)
 	// }
+
+
+
+ทดสอบการใช้งาน RSA 
+	// POST /send
+func SendEncrypted(c *gin.Context) {
+    message := "this is a secret"
+    encrypted, _ := rsa.EncryptOAEP(sha256.New(), rand.Reader, &publicKey, []byte(message), nil)
+    c.JSON(200, gin.H{"data": base64.StdEncoding.EncodeToString(encrypted)})
+}
+
+// POST /receive
+func ReceiveEncrypted(c *gin.Context) {
+    var json struct {
+        Data string `json:"data"`
+    }
+    c.BindJSON(&json)
+
+    encryptedBytes, _ := base64.StdEncoding.DecodeString(json.Data)
+    decrypted, _ := privateKey.Decrypt(nil, encryptedBytes, &rsa.OAEPOptions{Hash: crypto.SHA256})
+    c.JSON(200, gin.H{"message": string(decrypted)})
+}
+
+
+
+หากต้องการเข้ารหัส object แบบ JSON แทนข้อความธรรมดา:
+
+data := map[string]string{
+    "accountID": "100777",
+    "empName":   "someone",
+    "appRole":   "admin",
+}
+jsonBytes, _ := json.Marshal(data)
+encrypted, _ := rsa.EncryptOAEP(sha256.New(), rand.Reader, &publicKey, jsonBytes, nil)
+
+
+
+สร้าง private key
+openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
+สร้าง public key
+openssl rsa -pubout -in private.pem -out public.pem

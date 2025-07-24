@@ -4,6 +4,7 @@ import (
 	"CRUD_DOCKER_HOMEPAGE/db"
 	"CRUD_DOCKER_HOMEPAGE/handle"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,6 +13,7 @@ func main() {
 	db.InitDB()
 
 	router := gin.Default()
+	router.Use(cors.Default())
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -26,5 +28,5 @@ func main() {
 
 	router.POST("/receive_rawdata", handle.Receiveinfo_userawdata)
 
-	router.Run("localhost:8080") // listen and serve on 0.0.0.0:8080
+	router.Run("127.0.0.2:8080") // listen and serve on 0.0.0.0:8080
 }

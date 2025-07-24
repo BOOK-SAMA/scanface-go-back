@@ -54,8 +54,14 @@ func Login(c *gin.Context) {
 		}
 
 		c.JSON(http.StatusOK, gin.H{
+			"uid":         person.AccountID,
 			"tokenstring": Gentoken(person),
 			"Text":        "you logined",
+		})
+		return
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Text": "incorrect password",
 		})
 		return
 	}
